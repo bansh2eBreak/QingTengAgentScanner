@@ -126,8 +126,6 @@ class QingtengScan:
             }
             r = self.req_session.get(url, params=data, headers=headers)
             json_data = r.json()
-            # if (ip == '10.20.11.227'):
-            #     print(json_data)
             total_result_of_this_ip = json_data.get('total', 0)
 
             # 如果查询出来多个结果，需要遍历去确认IP是否一致
@@ -135,7 +133,6 @@ class QingtengScan:
                 rows = json_data.get('rows', [])
                 for row in rows:
                     internal_ip = row.get('internalIp')
-                    #print("aws上的IP：%s -- 青藤上的IP：%s" % (ip, internal_ip))
                     # 将每个row里面的internal_ip和形参ip进行对比，一旦对比一致表示青藤已经安装
                     if internal_ip == ip:
                         flag = True
@@ -190,9 +187,6 @@ class QingtengScan:
         response = requests.post(webhook_url, headers=headers, data=json.dumps(payload))
 
         print(response.text)
-        # print(response.status_code)
-        # if (response.status_code)
-        # logging.info("lark webhook消息推送成功")
 
     def list_objects(self, pattern=r".*ConfigSnapshot.*\.json\.gz$", past_hours=24):
         """

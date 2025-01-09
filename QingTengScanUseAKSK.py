@@ -129,23 +129,10 @@ class qingteng:
                 rows = json_data.get('rows', [])
                 for row in rows:
                     internal_ip = row.get('internalIp')
-                    #print("aws上的IP：%s -- 青藤上的IP：%s" % (ip, internal_ip))
                     # 将每个row里面的internal_ip和形参ip进行对比，一旦对比一致表示青藤已经安装
                     if internal_ip == ip:
                         flag = True
                         break
-            #     if flag:
-            #         logging.info("%s 已经安装青藤HIDS" % ip)
-            #         print("%s 已经安装青藤HIDS" % ip)
-            #     else:
-            #         logging.error("%s 未安装青藤HIDS" % ip)
-            #         print("%s 未安装青藤HIDS" % ip)
-            #         #qt.send_lark(webhook_url, str(int(time.time())), webhook_secret, ip)
-            # else:
-            #     #说明当前IP在青藤api没查到任何结果，代表这个IP一定没有安装青藤
-            #     logging.error("%s 未安装青藤HIDS" % ip)
-            #     print("%s 未安装青藤HIDS" % ip)
-            #     #qt.send_lark(webhook_url, str(int(time.time())), webhook_secret, ip)
         except Exception as e:
             print(e)
 
@@ -184,9 +171,6 @@ class qingteng:
         response = requests.post(webhook_url, headers=headers, data=json.dumps(payload))
 
         print(response.text)
-        # print(response.status_code)
-        # if (response.status_code)
-        # logging.info("lark webhook消息推送成功")
 
     def search_ec2_new(self, profile):
         '''
@@ -227,8 +211,6 @@ class qingteng:
                     logging.info("账号: %s, Region: %s, instance: %s, state: %s 包含 %d 个网卡" % (profile, regionName, instance.get('InstanceId'), state_name, len(instance.get('NetworkInterfaces'))))
                     for net_interface in instance.get('NetworkInterfaces', []):
                         privateIpAddress = net_interface.get('PrivateIpAddress')
-                        # if ('10.9.64.248' == privateIpAddress):
-                        #     print(instance)
                         if qt.get_agent(platform, privateIpAddress):
                             success_flag = True
                             break
