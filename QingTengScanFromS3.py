@@ -137,18 +137,6 @@ class QingtengScan:
                     if internal_ip == ip:
                         flag = True
                         break
-            #     if flag:
-            #         logging.info("%s 已经安装青藤HIDS" % ip)
-            #         print("%s 已经安装青藤HIDS" % ip)
-            #     else:
-            #         logging.error("%s 未安装青藤HIDS" % ip)
-            #         print("%s 未安装青藤HIDS" % ip)
-            #         #qt.send_lark(webhook_url, str(int(time.time())), webhook_secret, ip)
-            # else:
-            #     #说明当前IP在青藤api没查到任何结果，代表这个IP一定没有安装青藤
-            #     logging.error("%s 未安装青藤HIDS" % ip)
-            #     print("%s 未安装青藤HIDS" % ip)
-            #     #qt.send_lark(webhook_url, str(int(time.time())), webhook_secret, ip)
         except Exception as e:
             print(e)
 
